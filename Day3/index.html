@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Combined Lab</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        input, button { margin: 5px; padding: 8px; }
+        .userInfo { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<h1>JavaScript Lab: User Registration</h1>
+
+<label>Name: <input type="text" id="name"></label><br>
+<label>Email: <input type="text" name="email"></label><br>
+<button id="registerBtn" onclick>Register</button>
+
+<script>
+  document.getElementById('registerBtn').onclick = function() {
+	// from the name label
+        var username = document.getElementById('name').value;
+	// from the email label
+        var email = document.getElementsByName('email')[0].value;//
+	// redirect to server.html and put the name and email to the URL
+        location.href = 'server.html?username='+ encodeURI(username) +'&email=' + encodeURI(email);
+    }
+</script>
+</body>
+</html>
