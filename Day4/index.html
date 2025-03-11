@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Grading System</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; }
+    .container { width: 400px; margin: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid black; padding: 8px; text-align: center; }
+    .grade-A { color: green; font-weight: bold; }
+    .grade-B { color: blue; font-weight: bold; }
+    .grade-C { color: orange; font-weight: bold; }
+    .grade-F { color: red; font-weight: bold; }
+    .remove-btn { background: red; color: white; border: none; padding: 5px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Student Grading System</h2>
+  <input type="text" id="studentName" placeholder="Enter Student Name">
+  <input type="number" id="studentMarks" placeholder="Enter Marks" min="0" max="100">
+  <button id="addStudentBtn" onclick="addrow()">Add Student</button>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Marks</th>
+      <th>Grade</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody id="studentTable"></tbody>
+  </table>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
