@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation Task</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    form {
+      width: 300px;
+      margin: auto;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input:not([type="radio"]) {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    .error {
+      color: red;
+      font-size: 12px;
+      display: none;
+    }
+    button {
+      background-color: blue;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<h2>Registration Form</h2>
+<form action="welcome.html" method="get" id="registrationForm">
+  <div class="input-group">
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" name="fullName">
+    <span class="error" id="nameError">Only letters, min 3 characters</span>
+  </div>
+
+  <div class="input-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+    <span class="error" id="emailError">Enter a valid email</span>
+  </div>
+
+  <div class="input-group">
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+    <span class="error" id="passwordError">Min 8 chars, 1 uppercase, 1 lowercase, 1 number</span>
+  </div>
+
+  <div class="input-group">
+    <label for="phone">Phone Number:</label>
+    <input type="text" id="phone" name="phone">
+    <span class="error" id="phoneError">Must be 11 digits</span>
+  </div>
+
+  <div class="input-group">
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age">
+    <span class="error" id="ageError">Must be between 18 and 60</span>
+  </div>
+
+  <div class="input-group">
+    <label>Gender:</label><br>
+    <input type="radio" id="male" name="gender" value="male"> male
+    <input type="radio" id="female" name="gender" value="female"> female
+    <span class="error" id="genderError">One must select</span>
+  </div>
+
+  <button type="submit">Register</button>
+</form>
+
+<script src="script.js">
+</script>
+</body>
+</html>
