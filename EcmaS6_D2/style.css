@@ -1,0 +1,49 @@
+#user-buttons{
+    background-color: #585c5a;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: left;
+    margin: 10px auto;
+    max-width: 100%;
+  }
+  
+  #user-buttons button {
+    background-color: #d9e9e0;
+    color: rgb(19, 18, 18);
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  #user-buttons button:hover {
+    background-color: #024902;
+    color:antiquewhite
+   }
+  #title-posts{
+    background-color: #edeeee;
+    justify-content: left;
+    margin-top: 10px;
+    padding: 5px;
+    text-align: left;
+    border-radius: 2px;
+  } 
+  #title-posts p {
+    padding: 5px;
+    text-align: left;
+    color: rgb(5, 5, 5);
+  }
+  #user-container{
+    background-color:#e7f1f1;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: left;
+    margin: 20px auto;
+    max-width: 100%;
+  }
