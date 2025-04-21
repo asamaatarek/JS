@@ -1,40 +1,24 @@
-class box{
-    constructor(h,w,l){
-        this.height=h;
-        this.width=w;
-        this.length=l;
-        this.content=[]
-    }
-    dimensions(){
-        return `height is ${this.height},width is ${this.width},length is ${this.length}`;
-    }
-    get count(){
-        return this.content.length;
-    }
-    delete(book){
-        this.content.pop(book);
-    }
-    createBook(b){
-        this.content.push(b);
-    }
-    toString(){
-        console.log(`dimensions are : ${this.dimensions()} and number of books is ${this.count}`);
-    }
-    valueOf(){
-        return this.count;
-    }
-     
-}
-class books{
-    constructor(n,t){
-        if (!t){
-            throw("should have one argument title of the book")
-        }
-        else if (this.constructor="string"){
-            throw("title should be string")
-        }
-        this.name=n;
-        this.publisher=p;
-        this.type=t;
-    }
-}
+import { books ,box} from "./boxOfBooks.js";
+var box1 =new box(8,10,6,"paper");
+var box2 =new box(15,20,16,"paper");
+var book1 = new books("hj","fiction");
+var book2 = new books("km","science");
+var book3 = new books("wr","history");
+
+box1.addBook(book1);
+box2.addBook(book2);
+box2.addBook(book3);
+
+console.log(box2.numOfBooks);
+console.log(box1.numOfBooks);
+
+box2.deleteBook("wr");
+
+box1.toString();
+console.log(box1.volume);
+
+console.log(box1+box2);
+console.log(box1-box2);
+
+
+
