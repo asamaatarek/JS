@@ -1,0 +1,135 @@
+const easySymbols = ["🍎", "🍌", "🍒", "🍇", "🍉", "🍓", "🥑", "🥥"];
+const hardSymbols = ["🍎", "🍌", "🍒", "🍇", "🍉", "🍓", "🥑", "🥥", "🥝", "🍍", "🍊", "🍋", "🥭", "🍏", "🍈", "🍑", "🫐"];
+let shuffledSymbols = [];
+let flippedCards = [];
+let matchedCards = [];
+let moves = 0;
+let time = 0;
+let timer;
+let gameStarted = false;
+const urlParams = new URLSearchParams(window.location.search);
+const level = parseInt(urlParams.get("level")) || 4;
+
+function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
+
+function createGameBoard() {
+    let gridSize = level; 
+    let symbolSet = gridSize === 4 ? easySymbols : hardSymbols;
+    let numPairs = (gridSize * gridSize) / 2;
+    
+    shuffledSymbols = shuffle(symbolSet.slice(0, numPairs).concat(symbolSet.slice(0, numPairs)));
+    let board = document.getElementById("gameBoard");
+    board.innerHTML = ""; 
+
+    board.style.gridTemplateColumns = `repeat(${gridSize}, 80px)`;
+    board.style.gridTemplateRows = `repeat(${gridSize}, 80px)`;
+
+    shuffledSymbols.forEach((symbol, index) => {
+        let card = document.createElement("div");
+        card.classList.add("card");
+        card.dataset.index = index;
+        card.dataset.symbol = symbol;
+        card.addEventListener("click", flipCard);
+        board.appendChild(card);
+    });
+
+    // Reset game state
+    moves = 0;
+    time = 0;
+    matchedCards = [];
+    flippedCards = [];
+    document.getElementById("moves").textContent = moves;
+    document.getElementById("timer").textContent = time;
+    gameStarted = false;
+    clearInterval(timer);
+}
+
+function flipCard() {
+    if (!gameStarted) startTimer();
+    gameStarted = true;
+
+    let card = this;
+    if (flippedCards.length < 2 && !card.classList.contains("flipped")) {
+        card.classList.add("flipped");
+        card.textContent = card.dataset.symbol;
+        flippedCards.push(card);
+
+        if (flippedCards.length === 2) {
+            moves++;
+            document.getElementById("moves").textContent = moves;
+            checkMatch();
+        }
+    }
+}
+
+function checkMatch() {
+    let [card1, card2] = flippedCards;
+    if (card1.dataset.symbol === card2.dataset.symbol) {
+        card1.classList.add("matched");
+        card2.classList.add("matched");
+        matchedCards.push(card1, card2);
+        flippedCards = [];
+        if (matchedCards.length === shuffledSymbols.length) endGame();
+    } else {
+        setTimeout(() => {
+            card1.classList.remove("flipped");
+            card2.classList.remove("flipped");
+            card1.textContent = "";
+            card2.textContent = "";
+            flippedCards = [];
+        }, 1000);
+    }
+}
+
+function startTimer() {
+    timer = setInterval(() => {
+        time++;
+        document.getElementById("timer").textContent = time;
+    }, 1000);
+}
+
+function endGame() {
+    clearInterval(timer);
+    alert(`Congratulations! You won in ${moves} moves and ${time} seconds.`);
+
+    if (bestMoves === "--" || moves < bestMoves) {
+        localStorage.setItem("bestMoves", moves);
+        document.getElementById("bestMoves").textContent = moves;
+    }
+    if (bestTime === "--" || time < bestTime) {
+        localStorage.setItem("bestTime", time);
+        document.getElementById("bestTime").textContent = time;
+    }
+    
+    setTimeout(createGameBoard, 2000);
+}
+
+document.getElementById("resetGame").addEventListener("click", createGameBoard);
+
+document.getElementById("instructionBtn").addEventListener("click", () => {
+    alert("Match all the pairs as fast as you can! Click on a card to reveal its symbol.");
+});
+
+function goHome() {
+    window.location.href = "index.html";
+}
+
+document.getElementById("easyMode").addEventListener("click", () => {
+    window.location.href = "game.html?level=4";
+});
+
+document.getElementById("hardMode").addEventListener("click", () => {
+    window.location.href = "game.html?level=6";
+});
+
+createGameBoard();
+document.getElementById("startGame").addEventListener("click", function () {
+    document.getElementById("difficultyButtons").style.display = "block";
+    this.style.display = "none";
+});
+
+function startGame(level) {
+    window.location.href = `game.html?level=${level}`;
+}

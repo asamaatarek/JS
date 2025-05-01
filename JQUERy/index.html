@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Follows Mouse</title>
+  <style>
+    img {
+      position: absolute;
+      transition: all 0.2s ease;
+      width: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="page.png" id="myImage" />
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    let mouseX = 0;
+    let mouseY = 0;
+
+    // Track mouse position
+    $(document).on('mousemove', function(e) {
+      mouseX = e.pageX;
+      mouseY = e.pageY;
+    });
+
+    // On window resize or minimize
+    $(window).on('resize', function() {
+      moveImageToLeft();
+    });
+
+    function moveImageToLeft() {
+      const offsetX = 120; // move image 120px left from cursor
+      const offsetY = -30; // adjust vertically above or below if needed
+
+      $('#myImage').css({
+        left: mouseX - offsetX + 'px',
+        top: mouseY + offsetY + 'px'
+      });
+    }
+
+    // Optional: trigger on load as well
+    $(window).on('load', function() {
+      moveImageToLeft();
+    });
+  </script>
+</body>
+</html>

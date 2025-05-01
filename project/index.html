@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Matching Game - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1 id="title">Memory Matching Game</h1>
+
+    <button id="startGame">Start Game</button>
+
+    <div id="difficultyButtons" style="display: none;">
+        <button id="toggleInstructions">Instructions</button>
+<div id="instructions" style="display: none;">
+    <h2>How To Play Memory Match cards</h2>
+    <ul>
+        <li>Choose your level.</li>
+        <li>All cards are hidden at the Start and you need to find its matching pair.</li>
+        <li>Click on a card to reveal what is inside.</li>
+        <li>Click on another card to find its matching pair.</li>
+        <li>If the two cards match, they will remain open.</li>
+        <li>If they don’t match, they will flip back after a second.</li>
+        <li>Match all cards with thier pairs to complete the level.</li>
+        <li>Try to complete the game in the least number of moves and time to beat the Top Score.</li>
+    </ul>
+</div>
+
+        <h3>Choose Difficulty</h3>
+        <button onclick="startGame(4)">4 * 4 <span class="word">Easy</span></button>
+        <button onclick="startGame(6)">6 * 6 <span class="word">Medium</span></button>
+        <button onclick="startGame(8)">8 * 8 <span class="word">Hard</span></button>
+
+    </div>
+    <script>
+        document.getElementById("startGame").addEventListener("click", function () {
+            document.getElementById("difficultyButtons").style.display = "block";
+            this.style.display = "none";
+        });
+
+        function startGame(level) {
+            window.location.href = `game.html?level=${level}`;
+        }
+        document.getElementById("toggleInstructions").addEventListener("click", function () {
+    let instructions = document.getElementById("instructions");
+    if (instructions.style.display === "none") {
+        instructions.style.display = "block";
+    } else {
+        instructions.style.display = "none";
+    }
+});
+
+    </script>
+</body>
+</html>
